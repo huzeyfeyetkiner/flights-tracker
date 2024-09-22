@@ -2,6 +2,7 @@
 
 import { useMyFlights } from "@/context/MyFlightsContext"
 import { Flight } from "@/types/fligths-types"
+import { format, parseISO } from "date-fns"
 import Image from "next/image"
 import React from "react"
 
@@ -10,19 +11,28 @@ type FlightCardProps = {
 }
 
 function FlightCard({ flight }: FlightCardProps) {
-	const formatTime = (timeString: string) => {
-		const date = new Date(timeString)
-		return date.toLocaleTimeString([], {
-			hour: "2-digit",
-			minute: "2-digit",
-		})
+	const formatTime = (timeString?: string) => {
+		if (!timeString) {
+			return "Time not available" // Handle missing time
+		}
+
+		try {
+			const date = parseISO(timeString)
+			if (isNaN(date.getTime())) {
+				throw new Error("Invalid Date")
+			}
+			return format(date, "HH:mm")
+		} catch (error) {
+			console.error("Invalid time format:", timeString)
+			throw error
+		}
 	}
 
 	const { handleAddFlight } = useMyFlights()
 
 	return (
 		<div className="relative pb-12">
-			<div className="relative w-full rounded-md bg-white p-16">
+			<div className="relative w-full min-w-80 rounded-md bg-white p-16">
 				<p className="text-sm font-bold">
 					{flight.flightName} - {flight.flightNumber}
 				</p>
@@ -66,9 +76,6 @@ function FlightCard({ flight }: FlightCardProps) {
 					Save Flight
 				</button>
 			</div>
-			{/* <button className="bg-gray-200 text-purple-700 underline p-3 rounded-md">
-				Check the details
-			</button> */}
 		</div>
 	)
 }

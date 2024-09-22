@@ -1,23 +1,17 @@
 "use client"
 import MyFlightCard from "@/components/MyFlightCard"
-import { Flight } from "@/types/fligths-types"
+import { useMyFlights } from "@/context/MyFlightsContext"
 import React from "react"
 
 function Page() {
-	const storedFlights = localStorage.getItem("myFlights")
-		? localStorage.getItem("myFlights")
-		: null
-
-	const myFlights: Flight[] | null = storedFlights
-		? JSON.parse(storedFlights)
-		: null
+	const { myFlights } = useMyFlights()
 
 	if (!myFlights || myFlights.length === 0) {
 		return <div>No flights added yet!</div>
 	}
 
 	return (
-		<div>
+		<div className="w-[60%] min-w-96 flex flex-col mx-auto">
 			{myFlights.map((item, index) => {
 				return <MyFlightCard key={index} flight={item} />
 			})}

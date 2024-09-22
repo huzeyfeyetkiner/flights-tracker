@@ -9,6 +9,7 @@ import {
 	SetStateAction,
 } from "react"
 import { Flight } from "@/types/fligths-types"
+import { toast } from "sonner"
 
 // Context tipi
 type MyFlightsContextType = {
@@ -24,23 +25,33 @@ const MyFlightsContext = createContext<MyFlightsContextType | null>(null)
 // Provider fonksiyonu
 export function MyFlightsProvider({ children }: { children: React.ReactNode }) {
 	const [myFlights, setMyFlights] = useState<Flight[]>([])
+	const [isMounted, setIsMounted] = useState(false)
 
 	// Uçuş ekleme fonksiyonu
 	const handleAddFlight = (flight: Flight) => {
+		const flightExists = myFlights.some((item) => item.id === flight.id)
+		if (flightExists) {
+			toast.error("Flight already added!")
+			return
+		}
 		const newFlights = [...myFlights, flight]
+		if (!isMounted) return
 		setMyFlights(newFlights)
 		localStorage.setItem("myFlights", JSON.stringify(newFlights))
 		console.log(myFlights)
+		toast.success("Flight added to your list!")
 	}
 
 	const handleRemoveFlight = (flight: Flight) => {
-		const newFlights = myFlights.filter((item) => item !== flight)
+		const newFlights = myFlights.filter((item) => item.id !== flight.id)
 		setMyFlights(newFlights)
 		localStorage.setItem("myFlights", JSON.stringify(newFlights))
+		toast.success("Flight removed from your list!") // Başarılı kaldırma mesajı ekleyelim
 	}
 
 	// LocalStorage'den uçuşları çekme
 	useEffect(() => {
+		setIsMounted(true)
 		const myFlights = localStorage.getItem("myFlights")
 		if (myFlights) {
 			setMyFlights(JSON.parse(myFlights))
