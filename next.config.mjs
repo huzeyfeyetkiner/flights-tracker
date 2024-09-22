@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: [
-			"www.hertz.com",
-			"static.independent.co.uk",
-			"blog.travelcarma.com",
-		],
+		domains: ["www.hertz.com", "hoteldel.com", "blog.travelcarma.com"],
 	},
 }
 
