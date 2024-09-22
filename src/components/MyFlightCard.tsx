@@ -9,7 +9,7 @@ type FlightCardProps = {
 	flight: Flight
 }
 
-function FlightCard({ flight }: FlightCardProps) {
+function MyFlightCard({ flight }: FlightCardProps) {
 	const formatTime = (timeString: string) => {
 		const date = new Date(timeString)
 		return date.toLocaleTimeString([], {
@@ -18,7 +18,7 @@ function FlightCard({ flight }: FlightCardProps) {
 		})
 	}
 
-	const { handleAddFlight } = useMyFlights()
+	const { handleRemoveFlight } = useMyFlights()
 
 	return (
 		<div className="relative pb-12">
@@ -60,17 +60,17 @@ function FlightCard({ flight }: FlightCardProps) {
 				<button
 					className="w-24 h-12 absolute bottom-0 right-0 bg-purple-700 text-white font-bold rounded-sm"
 					onClick={() => {
-						handleAddFlight(flight)
+						handleRemoveFlight(flight)
 					}}
 				>
-					Save Flight
+					Remove
 				</button>
 			</div>
-			{/* <button className="bg-gray-200 text-purple-700 underline p-3 rounded-md">
+			<button className="bg-gray-200 text-purple-700 underline p-3 rounded-md">
 				Check the details
-			</button> */}
+			</button>
 		</div>
 	)
 }
 
-export default FlightCard
+export default MyFlightCard
