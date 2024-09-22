@@ -1,13 +1,9 @@
 import { FlightsResponse } from "@/types/fligths-types"
 
-const apiKey = "f81ae60e65879d2f5bbd9fb7ba61be5b"
-
-const apiUrl = "https://api.schiphol.nl/public-flights/flights"
-
 export const fetchFlights = async (
 	scheduleDate?: string
 ): Promise<FlightsResponse | undefined> => {
-	const url = `${apiUrl}?scheduleDate=${scheduleDate}`
+	const url = `${process.env.API_URL}?scheduleDate=${scheduleDate}`
 
 	try {
 		const response = await fetch(url, {
@@ -16,8 +12,8 @@ export const fetchFlights = async (
 			headers: {
 				Accept: "application/json",
 				ResourceVersion: "v4",
-				app_id: "c1405d21", // Uygulama ID'si
-				app_key: apiKey, // API anahtarı
+				app_id: process.env.APP_ID as string, // Uygulama ID'si
+				app_key: process.env.API_KEY as string, // API anahtarı
 			},
 		})
 
