@@ -20,14 +20,14 @@ This is a flight tracking application that fetches flight data from Schiphol Air
 
 ## Installation
 
-### 1. Repository'yi klonlayın:
+### 1. Clone the repository:
 
 ```bash
 git clone https://github.com/yourusername/schiphol-flights.git
 cd schiphol-flights
 ```
 
-### 2. Gerekli bağımlılıkları yükleyin:
+### 2.Install the required dependencies:
 
 ```bash
 npm install
@@ -35,9 +35,9 @@ npm install
 yarn install
 ```
 
-### 3. Environment Variables (.env) dosyasını oluşturun:
+### 3. Create the Environment Variables (.env) file:
 
-Projenin kök dizininde bir `.env` dosyası oluşturun ve aşağıdaki değişkenleri ekleyin:
+In the root directory of the project, create a .env file and add the following variables:
 
 ```bash
 API_URL="https://api.schiphol.nl/public-flights/flights"
@@ -47,9 +47,9 @@ APP_ID="your-app-id-here"
 
 `your-api-key-here` ve `your-app-id-here` kısımlarını kendi Schiphol API bilgileriniz ile değiştirin.
 
-### 4. Uygulamayı çalıştırın:
+### 4. Run the application:
 
-Projenizi yerel ortamda çalıştırmak için aşağıdaki komutu kullanın:
+To run the project locally, use the following command:
 
 ```bash
 npm run dev
@@ -57,4 +57,7 @@ npm run dev
 yarn dev
 ```
 
-Uygulama `http://localhost:3000` adresinde kullanılabilir olacaktır.
+The app will be available at http://localhost:3000.
+
+![Image](https://i.hizliresim.com/p4gb83f.png)(https://hizliresim.com/p4gb83f)
+![Image](https://i.hizliresim.com/7pkd9es.png)(https://hizliresim.com/7pkd9es)
