@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
+import NavBar from "@/components/NavBar"
+import { MyFlightsProvider } from "@/context/MyFlightsContext"
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -26,9 +28,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-1 min-h-screen bg-gray-50 p-12`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50 p-12`}
 			>
-				{children}
+				<MyFlightsProvider>
+					<NavBar />
+					{children}
+				</MyFlightsProvider>
 			</body>
 		</html>
 	)
